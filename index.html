@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Name | Academic Portfolio</title>
+    <!-- Tailwind CSS via CDN for easy maintenance -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .project-card:hover .project-image { transform: scale(1.03); }
+        .sticky-nav { backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 border-b border-slate-200 sticky-nav">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-semibold text-xl tracking-tight">Carrie Ye, MD, MPH</a>
+            <div class="space-x-8 text-sm font-medium text-slate-600">
+                <a href="#about" class="hover:text-blue-600 transition">About</a>
+                <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
+                <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="about" class="max-w-5xl mx-auto px-6 pt-20 pb-16">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="w-48 h-68 rounded-2xl bg-slate-200 overflow-hidden shadow-inner flex-shrink-0">
+                <!-- Professor's Image (Preserved) -->
+                <img src="https://www.naop.ca/wp-content/uploads/2021/01/Researcher-Photos-CarrieYe.jpg?auto=format&fit=crop&q=80&w=400" alt="Professor Profile" class="w-full h-full object-cover">
+            </div>
+            <div>
+                <h1 class="text-3xl md:text-3xl font-bold mb-4">Associate Professor, Faculty of Medicine & Dentistry</h1>
+                <p class="text-xl text-slate-600 max-w-2xl mb-6">
+                    My research focuses on the intersections of bone and joint diseases, cancer and artificial intelligence. 
+                </p>
+                <div class="flex gap-4">
+                    <a href="mailto:cye@ualberta.ca" class="bg-slate-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Projects Section -->
+    <main id="projects" class="max-w-5xl mx-auto px-6 py-12">
+        <div class="flex items-center justify-between mb-12">
+            <h2 class="text-3xl font-bold">Current & Past Research</h2>
+            <div class="flex gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+                <span>Recent Work</span>
+            </div>
+        </div>
+
+        <!-- Project Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            
+            <!-- Project 1 -->
+            <article class="project-card group">
+                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
+                    <img src="assets/triage.png?auto=format&fit=crop&q=80&w=800" alt="Clinical NLP Research" class="project-image w-full h-full object-cover transition duration-500">
+                    <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Ongoing</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">Natural Language Processing for Triaging Incoming Referral Letters</h3>
+                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                    Using different models to predict the inflammatory arthrisis disease.
+                </p>
+                <div class="mb-4">
+                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
+                    <p class="text-xs text-slate-700 italic">Kiana Aghakasiri, Mohamed Abdalla, Carrie Ye</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <!-- <a href="https://aclanthology.org/2025.emnlp-main.1637/" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a> -->
+                </div>
+            </article>
+            
+            
+            <!-- Project 2 -->
+            <article class="project-card group">
+                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
+                    <img src="assets/deid.png?auto=format&fit=crop&q=80&w=800" alt="Clinical NLP Research" class="project-image w-full h-full object-cover transition duration-500">
+                    <!-- <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Ongoing</span> -->
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">Not What the Doctor Ordered: Surveying LLM-based De-identification and Quantifying Clinical Information Loss</h3>
+                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                    This survey identifies key limitations in current LLM-based de-identification literature, highlighting inconsistent reporting and the risks of altering clinically relevant information while removing patient identifiers.
+                </p>
+                <div class="mb-4">
+                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
+                    <p class="text-xs text-slate-700 italic">Kiana Aghakasiri, Noopur Zambare, JoAnn Thai, Carrie Ye, Mayur Mehta, J Ross Mitchell, Mohamed Abdalla</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://aclanthology.org/2025.emnlp-main.1637/" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card group">
+                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
+                    <img src="assets/deid-culture.png?auto=format&fit=crop&q=80&w=800" alt="Multi-cultural de-id" class="project-image w-full h-full object-cover transition duration-500">
+                    <!-- <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Ongoing</span> -->
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">Towards Fair and Efficient De-identification: Quantifying Multi-cultural Generalizability</h3>
+                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                    Evaluating how transformer models generalize clinical de-identification across different formats, cultures, and genders, introducing a benchmark for Mandarin, Hindi, Spanish, and French variants.
+                </p>
+                <div class="mb-4">
+                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
+                    <p class="text-xs text-slate-700 italic">Noopur Zambare, Kiana Aghakasiri, Carissa Lin, Carrie Ye, J Ross Mitchell,Mohamed Abdalla</p>
+                </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card group">
+                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
+                    <img src="assets/llm.png?auto=format&fit=crop&q=80&w=800" alt="Long Memory Research" class="project-image w-full h-full object-cover transition duration-500">
+                    <!-- <span class="absolute top-4 left-4 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Archive</span> -->
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">Beyond a Million Tokens: Benchmarking and Enhancing Long-Term Memory in LLMs</h3>
+                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                    An investigation into the architectural limits of LLMs when processing extremely long contexts, proposing methods to improve retrieval accuracy and memory retention beyond traditional token limits.
+                </p>
+                <div class="mb-4">
+                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
+                    <p class="text-xs text-slate-700 italic">Mohammad Tavakoli, Alireza Salemi, Carrie Ye, Mohamed Abdalla, Hamed Zamani, J Ross Mitchell</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://arxiv.org/abs/2510.27246" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Contact / Footer -->
+    <footer id="contact" class="bg-white border-t border-slate-200 mt-20">
+        <div class="max-w-5xl mx-auto px-6 py-16 text-center">
+            <div class="flex justify-center gap-6">
+                <a href="https://scholar.google.com/citations?user=_CJUQ50AAAAJ&hl=en" class="text-slate-400 hover:text-blue-600 transition">Google Scholar</a>
+                <a href="#" class="text-slate-400 hover:text-blue-600 transition">LinkedIn</a>
+                <a href="#" class="text-slate-400 hover:text-blue-600 transition">Twitter/X</a>
+            </div>
+            <p class="mt-12 text-xs text-slate-400">© 2026 Carrie Ye, MD, MPH. Built with academic focus.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
