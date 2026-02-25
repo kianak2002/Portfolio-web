@@ -4,172 +4,327 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alberta Quality Assessment Tools</title>
-    <!-- Tailwind CSS via CDN for easy maintenance -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .project-card:hover .project-image { transform: scale(1.03); }
-        .sticky-nav { backdrop-filter: blur(10px); }
+        .sticky-nav { backdrop-filter: blur(12px); }
+        .page-transition { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tool-card:hover .tool-image { transform: scale(1.02); }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-900 leading-relaxed">
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-slate-700/90 border-b border-slate-200 sticky-nav">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- <a href="#" class="font-semibold text-xl tracking-tight">Carrie Ye, MD, MPH</a> -->
-            <div class="space-x-8 text-sm font-medium text-slate-200">
-                <a href="#about" class="hover:text-blue-600 transition">About</a>
-                <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
-                <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+    <nav class="sticky top-0 z-50 bg-slate-700/95 border-b border-slate-700 sticky-nav text-white">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <button onclick="showPage('home')" class="nav-link hover:text-blue-400 transition" data-page="home">Home</button>
+                <button onclick="showPage('tools')" class="nav-link hover:text-blue-400 transition" data-page="tools">Tools</button>
+                <button onclick="showPage('contact')" class="nav-link hover:text-blue-400 transition" data-page="contact">Contact</button>
             </div>
+            <!-- Mobile Menu Toggle -->
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden bg-slate-900 border-t border-slate-700 md:hidden flex flex-col p-4 space-y-4 text-sm font-medium">
+            <button onclick="showPage('home'); toggleMobileMenu()" class="text-left py-2">Home</button>
+            <button onclick="showPage('tools'); toggleMobileMenu()" class="text-left py-2">Tools</button>
+            <button onclick="showPage('contact'); toggleMobileMenu()" class="text-left py-2">Contact</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-        <header id="about" class="max-w-5xl mx-auto px-6 pt-20 pb-16">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="w-full md:w-1/2 h-64 rounded-3xl bg-slate-900 overflow-hidden shadow-2xl relative">
-                    <!-- Professor's Image (Preserved) -->
-                    <img src="assets/aqat.png?auto=format&fit=crop&q=80&w=400" alt="AQAT image" class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <h1 class="text-3xl md:text-3xl font-bold mb-4">Alberta Quality Assessment Tools</h1>
-                    <p class="text-xl text-slate-600 max-w-2xl mb-6">
-                        Designed to measure and improve the quality, safety, and performance of healthcare services across Alberta.
+    <!-- Page Content Container -->
+    <div id="content-area" class="flex-grow">
+        
+        <!-- HOME PAGE (More Compact) -->
+        <section id="page-home" class="page-transition">
+            <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <div class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest mb-6">
+                        Clinical AI Tools
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight text-slate-900">
+                        Alberta Quality Assessment Tools
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-xl">
+                        Toolkits for evaluating clinical artificial intelligence systems
                     </p>
-                    <div class="flex gap-4">
-                        <a href="mailto:cye@ualberta.ca" class="bg-slate-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">Get in touch</a>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="showPage('tools')" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-xl shadow-blue-200">
+                            Explore Tools
+                        </button>
+                        <button onclick="showPage('contact')" class="bg-white border border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition">
+                            Contact Us
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-blue-500/10 rounded-[2.5rem] blur-2xl"></div>
+                        <img src="assets/aqat.png" alt="AQAT Landing Visual" class="relative rounded-[2rem] shadow-2xl border border-white/50 w-full object-cover aspect-square md:aspect-auto h-[450px]">
                     </div>
                 </div>
             </div>
-        </header>
+        </section>
 
-    <!-- Projects Section -->
-    <main id="projects" class="max-w-5xl mx-auto px-6 py-12">
-        <div class="flex items-center justify-between mb-12">
-            <h2 class="text-3xl font-bold">Tools</h2>
-            <div class="flex gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
-                <span>Technical Solutions</span>
+        <!-- TOOLS PAGE (Wide Projects) -->
+        <section id="page-tools" class="hidden page-transition py-20">
+            <div class="max-w-[1200px] mx-auto px-6">
+                <header class="mb-16">
+                    <h2 class="text-4xl font-bold mb-4 text-slate-900">Tools</h2>
+                    <!-- <p class="text-slate-500 max-w-2xl">Research-driven frameworks addressing clinical safety, information retention, and multicultural equity in modern AI models.</p> -->
+                </header>
+
+                <div class="space-y-12">
+                    <!-- Project 1 -->
+                    <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
+                                <!-- <img src="assets/triage.png" alt="AQAT RoB" class="tool-image w-full h-full object-cover transition-transform duration-500"> -->
+                                <div class="w-full h-full flex items-center justify-center bg-slate-100 italic text-slate-400">Image Preview Coming Soon</div>
+                            </div>
+                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Ongoing</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">AQAT (Alberta Quality Assessment Tool: Risk of Bias)</h3>
+                                <p class="text-slate-600 mb-6 leading-relaxed">Evaluation framework specifically designed for risk assessment in medical diagnostic AI systems, focusing on reliability and clinical safety standards.</p>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Coming Soon</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
+                                <img src="assets/LCIRE.png" alt="CIRE Tool" class="tool-image w-full h-full object-cover transition-transform duration-500">
+                            </div>
+                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">CIRE (LLM-based Clinical Information Retention Evaluation)</h3>
+                                <p class="text-slate-600 mb-6 leading-relaxed">An LLM-based metric that measures whether clinically meaningful information has been changed, removed, or preserved in clinical texts.</p>
+                                <div class="mb-6">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
+                                    <p class="text-xs text-slate-700 italic leading-relaxed">Kiana Aghakasiri, Noopur Zambare, JoAnn Thai, Carrie Ye, Mayur Mehta, J Ross Mitchell, Mohamed Abdalla</p>
+                                </div>
+                                <a href="https://aclanthology.org/2025.emnlp-main.1637/" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
+                                    Read Paper <span class="ml-2">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
+                                <img src="assets/deid-culture.png" alt="Multicultural DeID" class="tool-image w-full h-full object-cover transition-transform duration-500">
+                            </div>
+                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">BERT-MultiCulture-DEID</h3>
+                                <p class="text-slate-600 mb-6 leading-relaxed">A de-identification model based on BERT that is designed to improve equity across diverse linguistic and cultural identifiers in clinical text.</p>
+                                <div class="mb-6">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
+                                    <p class="text-xs text-slate-700 italic leading-relaxed">Noopur Zambare, Kiana Aghakasiri, Carissa Lin, Carrie Ye, J Ross Mitchell, Mohamed Abdalla</p>
+                                </div>
+                                <a href="https://arxiv.org/abs/2602.15869" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
+                                    View Paper <span class="ml-2">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
+                                <img src="assets/BEAM.png" alt="BEAM Research" class="tool-image w-full h-full object-cover transition-transform duration-500">
+                            </div>
+                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">BEAM: Benchmarking Memory Capabilities of LLMs</h3>
+                                <p class="text-slate-600 mb-6 leading-relaxed">A large-scale benchmark of long, coherent multi-domain conversations (up to 10 million tokens) with probing questions designed to measure diverse long-term memory abilities in LLMs.</p>
+                                <div class="mb-6">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
+                                    <p class="text-xs text-slate-700 italic leading-relaxed">Mohammad Tavakoli, Alireza Salemi, Carrie Ye, Mohamed Abdalla, Hamed Zamani, J Ross Mitchell</p>
+                                </div>
+                                <a href="https://arxiv.org/abs/2510.27246" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
+                                    Read Paper <span class="ml-2">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5 -->
+                    <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
+                                <img src="assets/llm.png" alt="LIGHT Framework" class="tool-image w-full h-full object-cover transition-transform duration-500">
+                            </div>
+                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">LIGHT: Improving Memory Capabilities of LLMs</h3>
+                                <p class="text-slate-600 mb-6 leading-relaxed">A cognitively inspired memory-augmentation framework that equips LLMs with episodic, working, and scratchpad memory systems to improve performance on long-context tasks evaluated by BEAM.</p>
+                                <div class="mb-6">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
+                                    <p class="text-xs text-slate-700 italic leading-relaxed">Mohammad Tavakoli, Alireza Salemi, Carrie Ye, Mohamed Abdalla, Hamed Zamani, J Ross Mitchell</p>
+                                </div>
+                                <a href="https://arxiv.org/abs/2510.27246" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
+                                    Read Paper <span class="ml-2">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
             </div>
-        </div>
-
-        <!-- Project Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            
-            <!-- Project 1 -->
-            <article class="project-card group">
-                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
-                    <img src="assets/triage.png?auto=format&fit=crop&q=80&w=800" alt="Clinical NLP Research" class="project-image w-full h-full object-cover transition duration-500">
-                    <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Ongoing</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">AQAT (Alberta Quality Assessment Tool: Risk of Bias)</h3>
-                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                    Coming Soon
-                </p>
-                <div class="mb-4">
-                    <!-- <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p> -->
-                    <!-- <p class="text-xs text-slate-700 italic">Kiana Aghakasiri, Mohamed Abdalla, Carrie Ye</p> -->
-                </div>
-                <div class="flex items-center gap-4">
-                    <!-- <a href="https://aclanthology.org/2025.emnlp-main.1637/" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a> -->
-                </div>
-            </article>
-            
-            
-            <!-- Project 2 -->
-            <article class="project-card group">
-                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
-                    <img src="assets/LCIRE.png?auto=format&fit=crop&q=80&w=800" alt="Clinical NLP Research" class="project-image w-full h-full object-cover transition duration-500">
-                    <!-- <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Ongoing</span> -->
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">CIRE (LLM-based Clinical Information Retention Evaluation)</h3>
-                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                    An LLM-based metric that measures whether clinically meaningful information has been changed, removed, or preserved between in clinical texts.
-                </p>
-                <div class="flex items-center gap-4">
-                    <a href="https://aclanthology.org/2025.emnlp-main.1637/" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a>
-                </div>
-                <div class="mb-4">
-                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
-                    <p class="text-xs text-slate-700 italic">Kiana Aghakasiri, Noopur Zambare, JoAnn Thai, Carrie Ye, Mayur Mehta, J Ross Mitchell, Mohamed Abdalla</p>
-                </div>
-            </article>
-
-            <!-- Project 3 -->
-            <article class="project-card group">
-                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
-                    <img src="assets/deid-culture.png?auto=format&fit=crop&q=80&w=800" alt="Multi-cultural de-id" class="project-image w-full h-full object-cover transition duration-500">
-                    <!-- <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Ongoing</span> -->
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">BERT-MultiCulture-DEID</h3>
-                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                    A de-identification model based on BERT that is designed to improve equity across diverse linguistic and cultural identifiers in clinical text.
-                </p>
-                <div class="flex items-center gap-4">
-                    <a href="https://arxiv.org/abs/2602.15869" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a>
-                </div>
-                <div class="mb-4">
-                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
-                    <p class="text-xs text-slate-700 italic">Noopur Zambare, Kiana Aghakasiri, Carissa Lin, Carrie Ye, J Ross Mitchell,Mohamed Abdalla</p>
-                </div>
-            </article>
-
-            <!-- Project 4 -->
-            <article class="project-card group">
-                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
-                    <img src="assets/BEAM.png?auto=format&fit=crop&q=80&w=800" alt="Long Memory Research- Benchmark" class="project-image w-full h-full object-cover transition duration-500">
-                    <!-- <span class="absolute top-4 left-4 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Archive</span> -->
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">BEAM: Benchmarking Memory Capabilities of LLMs</h3>
-                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                    A large-scale benchmark of long, coherent multi-domain conversations (up to 10 million tokens) with probing questions designed to measure diverse long-term memory abilities in LLMs.
-                </p>
-                <div class="flex items-center gap-4">
-                    <a href="https://arxiv.org/abs/2510.27246" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a>
-                </div>
-                <div class="mb-4">
-                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
-                    <p class="text-xs text-slate-700 italic">Mohammad Tavakoli, Alireza Salemi, Carrie Ye, Mohamed Abdalla, Hamed Zamani, J Ross Mitchell</p>
-                </div>
-            </article>
+        </section>
 
 
-            <!-- Project 5 -->
-            <article class="project-card group">
-                <div class="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[16/9] mb-4">
-                    <img src="assets/llm.png?auto=format&fit=crop&q=80&w=800" alt="Long Memory Research- Framework" class="project-image w-full h-full object-cover transition duration-500">
-                    <!-- <span class="absolute top-4 left-4 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Archive</span> -->
+        <!-- CONTACT PAGE (Back to focused design) -->
+        <section id="page-contact" class="hidden page-transition py-20">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100 flex flex-col md:flex-row">
+                    <div class="bg-slate-700 text-white p-12 md:w-2/5 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-8">
+                                Interested in clinical validation, research partnership, or technical implementation?
+                            </p>
+                        </div>
+                        <div class="space-y-4 text-sm font-medium">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs">📍</span>
+                                <span>University of Alberta, Canada</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-12 md:w-3/5">
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-400 mb-2">First Name</label>
+                                    <input type="text" name="firstName" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Last Name</label>
+                                    <input type="text" name="lastName" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Email Address</label>
+                                <input type="email" name="email" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Message</label>
+                                <textarea name="message" required rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"></textarea>
+                            </div>
+                            <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-100">
+                                Send Message
+                            </button>
+                        </form>
+                        <div id="formSuccess" class="hidden text-center py-10">
+                            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">✓</div>
+                            <h3 class="text-xl font-bold mb-2">Message Received</h3>
+                            <p class="text-slate-500 text-sm">Thank you for reaching out.</p>
+                            <button onclick="resetForm()" class="mt-6 text-blue-600 font-bold text-sm">Send another message</button>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition italic text-slate-800">LIGHT: Improving Memory Capabilities of LLMs</h3>
-                <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                    A cognitively inspired memory-augmentation framework that equips LLMs with episodic, working, and scratchpad memory systems to improve performance on long-context tasks evaluated by BEAM.
-                </p>
-                <div class="flex items-center gap-4">
-                    <a href="https://arxiv.org/abs/2510.27246" target="_blank" class="text-sm font-semibold text-blue-600 hover:underline">Read Paper →</a>
-                </div>
-                <div class="mb-4">
-                    <p class="text-[11px] font-semibold text-slate-400 uppercase mb-1">Authors</p>
-                    <p class="text-xs text-slate-700 italic">Mohammad Tavakoli, Alireza Salemi, Carrie Ye, Mohamed Abdalla, Hamed Zamani, J Ross Mitchell</p>
-                </div>
-            </article>
-
-        </div>
-    </main>
-
-    <!-- Contact / Footer -->
-    <footer id="contact" class="bg-slate-700/90 border-t border-slate-200 mt-20">
-        <div class="max-w-5xl mx-auto px-6 py-16 text-center">
-            <div class="flex justify-center gap-6">
-                <a href="https://scholar.google.com/citations?user=_CJUQ50AAAAJ&hl=en" class="text-slate-400 hover:text-blue-600 transition">Google Scholar</a>
-                <a href="#" class="text-slate-400 hover:text-blue-600 transition">LinkedIn</a>
-                <a href="#" class="text-slate-400 hover:text-blue-600 transition">Twitter/X</a>
             </div>
-            <!-- <p class="mt-12 text-xs text-slate-400">© 2026 Carrie Ye, MD, MPH. Built with academic focus.</p> -->
-            <p class="mt-16 text-[10px] text-slate-300 uppercase tracking-widest">© 2026 Alberta Quality Assessment Tools (AQAT). All rights reserved.</p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-700 text-white py-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                    <p class="text-slate-200 text-xs">Alberta Quality Assessment Tools</p>
+                    <p class="mt-16 text-[10px] text-slate-300 uppercase tracking-widest">© 2026 Alberta Quality Assessment Tools (AQAT). All rights reserved.</p>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById('page-' + pageId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.dataset.page === pageId) {
+                    link.classList.add('text-blue-400');
+                    link.classList.remove('text-slate-200');
+                } else {
+                    link.classList.remove('text-blue-400');
+                    link.classList.add('text-slate-200');
+                }
+            });
+            history.pushState(null, null, '#' + pageId);
+        }
+
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (['home', 'tools', 'contact'].includes(hash)) {
+                showPage(hash);
+            } else {
+                showPage('home');
+            }
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = "Sending...";
+
+            const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgelvjk';
+
+            try {
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    document.getElementById('contactForm').classList.add('hidden');
+                    document.getElementById('formSuccess').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error("Form error:", error);
+                document.getElementById('contactForm').classList.add('hidden');
+                document.getElementById('formSuccess').classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('contactForm').reset();
+            document.getElementById('contactForm').classList.remove('hidden');
+            document.getElementById('formSuccess').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
