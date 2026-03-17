@@ -98,7 +98,7 @@
                                 <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">AQAT (Alberta Quality Assessment Tool: Risk of Bias)</h3>
                                 <p class="text-slate-600 mb-8 leading-relaxed max-w-3xl">Evaluation framework specifically designed for risk assessment in medical diagnostic AI systems, focusing on reliability and clinical safety standards.</p>
                                 <div class="table-container overflow-x-auto border border-slate-200 rounded-xl bg-slate-50">
-                                    <table class="w-full text-left text-sm border-collapse min-w-[1000px]">
+                                    <table id="judgementTable" class="w-full text-left text-sm border-collapse min-w-[1000px]">
                                         <thead>
                                             <tr class="bg-slate-800 text-white">
                                                 <!-- <th class="p-4 border-r border-slate-700 w-1/4">Questions & Criteria</th> -->
@@ -320,7 +320,7 @@
                                     </table>
                                 </div>
                                 <div class="mt-6 flex justify-end">
-                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition" onclick="window.print()">Export Judgement</button>
+                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition" onclick="exportTableJudgement()">Export Judgement</button>
                                 </div>
                             </div>
                         </div>
@@ -538,6 +538,7 @@
     </footer>
 
     <script>
+        
         function showPage(pageId) {
             document.querySelectorAll('section').forEach(section => {
                 section.classList.add('hidden');
@@ -605,6 +606,70 @@
             document.getElementById('contactForm').reset();
             document.getElementById('contactForm').classList.remove('hidden');
             document.getElementById('formSuccess').classList.add('hidden');
+        }
+
+        function exportTableJudgement() {
+            const table = document.getElementById('judgementTable');
+            if (!table) return;
+
+            // Clone the table to avoid modifying the UI
+            const tableClone = table.cloneNode(true);
+
+            // Handle dropdowns: cloning doesn't preserve selected values
+            // We find the original selects and update the clone with static text
+            const originalSelects = table.querySelectorAll('select');
+            const clonedSelects = tableClone.querySelectorAll('select');
+
+            originalSelects.forEach((select, index) => {
+                const selectedText = select.options[select.selectedIndex].text;
+                const parent = clonedSelects[index].parentNode;
+                
+                // Create a styled span to replace the select in the print version
+                const span = document.createElement('span');
+                span.innerText = selectedText === 'Select...' ? 'Not Judged' : selectedText;
+                span.style.fontWeight = 'bold';
+                
+                // Color coding based on value
+                if (select.value === 'Low') span.style.color = '#16a34a';
+                if (select.value === 'High') span.style.color = '#dc2626';
+                if (select.value === 'Unclear') span.style.color = '#ca8a04';
+
+                parent.replaceChild(span, clonedSelects[index]);
+            });
+
+            // Create a temporary hidden iframe for printing
+            const printWindow = window.open('', '_blank', 'height=600,width=900');
+            
+            printWindow.document.write('<html><head><title>AQAT Export</title>');
+            // Add basic styles to the print window
+            printWindow.document.write('<style>');
+            printWindow.document.write('body { font-family: sans-serif; padding: 40px; color: #1e293b; }');
+            printWindow.document.write('h1 { font-size: 24px; margin-bottom: 20px; text-align: center; }');
+            printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 12px; }');
+            printWindow.document.write('th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; vertical-align: top; }');
+            printWindow.document.write('th { background-color: #1e293b; color: white; }');
+            printWindow.document.write('.bg-slate-200-50 { background-color: #f1f5f9; font-weight: bold; }');
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write('<h1>AQAT: Risk of Bias Assessment Results</h1>');
+            printWindow.document.write(tableClone.outerHTML);
+            printWindow.document.write('</body></html>');
+            
+            printWindow.document.close();
+            
+            // Wait for content to render before printing
+            printWindow.onload = function() {
+                printWindow.focus();
+                printWindow.print();
+                printWindow.close();
+            };
+            
+            // Fallback for browsers where onload might not trigger correctly on an empty-started window
+            setTimeout(() => {
+                if (!printWindow.closed) {
+                    printWindow.print();
+                    printWindow.close();
+                }
+            }, 500);
         }
     </script>
 </body>
