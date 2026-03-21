@@ -15,6 +15,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .tool-card:hover .tool-image { transform: scale(1.02); }
+        .cite-tab { background: transparent; color: #94a3b8; }
+        .cite-tab.active { background: #1e40af; color: #fff; }
+        .cite-tab:not(.active):hover { background: #f1f5f9; color: #475569; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
@@ -46,8 +49,8 @@
 
     <!-- Page Content Container -->
     <div id="content-area" class="flex-grow">
-        
-        <!-- HOME PAGE (More Compact) -->
+
+        <!-- HOME PAGE -->
         <section id="page-home" class="page-transition">
             <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center gap-12">
                 <div class="w-full md:w-1/2">
@@ -58,7 +61,7 @@
                         Alberta Quality Assessment Tools
                     </h1>
                     <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-xl">
-                        Toolkits for evaluating clinical artificial intelligence systems – hosted at University at Alberta
+                        Toolkits for evaluating clinical artificial intelligence systems – hosted at University of Alberta
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <button onclick="showPage('tools')" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-xl shadow-blue-200">
@@ -78,8 +81,8 @@
             </div>
         </section>
 
-        
-        <!-- TOOLS PAGE (Wide Projects) -->
+
+        <!-- TOOLS PAGE -->
         <section id="page-tools" class="hidden page-transition py-20">
             <div class="max-w-[1200px] mx-auto px-6">
                 <header class="mb-16">
@@ -88,259 +91,40 @@
                 </header>
 
                 <div class="space-y-12">
-                    <!-- Project 1 (Interactive Table Version) -->
+
+                    <!-- Project 1: AQAT — now links to its own page -->
                     <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col">
-                            <div class="p-8 md:p-12">
-                                <div class="flex items-center gap-3 mb-4">
-                                    <span class="bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Ongoing</span>
-                                </div>
-                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">AQAT (Alberta Quality Assessment Tool: Risk of Bias)</h3>
-                                <p class="text-slate-600 mb-8 leading-relaxed max-w-3xl">Evaluation framework specifically designed for risk assessment in medical diagnostic AI systems, focusing on reliability and clinical safety standards.</p>
-                                <div class="table-container overflow-x-auto border border-slate-200 rounded-xl bg-slate-50">
-                                    <table id="judgementTable" class="w-full text-left text-sm border-collapse min-w-[1000px]">
-                                        <thead>
-                                            <tr class="bg-slate-800 text-white">
-                                                <!-- <th class="p-4 border-r border-slate-700 w-1/4">Questions & Criteria</th> -->
-                                                <th class="p-4 border-r border-slate-700 w-1/4">Type of bias</th>
-                                                <th class="p-4 border-r border-slate-700 w-1/4">Potential Source of Bias</th>
-                                                <th class="p-4 border-r border-slate-700 w-1/3">Support for Judgement</th>
-                                                <th class="p-4 w-40 text-center">Judgement (RoB)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-slate-200">
-                                            <tr class="bg-slate-200/50 font-bold">
-                                                <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Questions</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Question Source:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • If questions were created/generated specifically for the study, describe the method used to create the question dataset, including who created the questions and if the questions are reflective of the intended study objective<br>
-                                                    • If questions were selected from an existing question source, adequately describe the source to allow an assessment of whether it addresses the intended research question<br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Expectancy bias due to creation of questions reflective of researcher's expectations<br>
-                                                    • Representation bias due to question source not being representative of the target population<br>
-                                                    • Construct-validity bias due to questions not matching the research aim
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="3" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Question Selection:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • If questions were selected from an existing question source, describe the method used to select the questions from the original source (eg, random, consecutive, all, or by certain factors)
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Sampling bias due to question not being representative of the intended setting
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="2" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Question Manipulation:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • If any questions were manipulated from the original source, describe and justify the rationale for the manipulation. <br>
-                                                    • Or if any prompting was provided in addition to the index question, report the exact wording of the prompt(s)
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Construct-validity bias due to questions not matching the research aim<br>
-                                                    • Expectancy bias due to question manipulation that may reflect researcher’s expectations
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="2" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <!-- Reference Section -->
-                                            <tr class="bg-slate-200/50 font-bold">
-                                                <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Reference Answers</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Reference Answer Source:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • If reference answers were generated specifically for the study, describe the method used to create the reference answer dataset, including who created the reference answers and if the answers are reflective of a true reference standard<br>
-                                                    • If reference answers were selected from an existing reference answer source, adequately describe the source to allow an assessment of whether it is reflective of a true reference standard
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Construct-validity bias due to answers not matching the true reference standard study was designed to evaluate<br>
-                                                    • Representation bias due to question source not being representative of the target population
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="3" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Reference Answer Source:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • If not all reference answers to a given question were used, describe the method by which reference answers were selected
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Sampling bias due to answers not being representative of the intended setting<br>
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="3" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <!-- LLM Answers -->
-                                            <tr class="bg-slate-200/50 font-bold">
-                                                <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">LLM answers</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>LLM Answer Section:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Describe how many answers were generated for each question and if not all answers were assessed, describe how answers were selected for assessment
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Sampling bias due to answers not being representative of all LLM answers
-                                                </td>
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <!-- Evaluators -->
-                                            <tr class="bg-slate-200/50 font-bold">
-                                                <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Evaluators</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Evaluator Selection:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Describe the method used to select evaluators, and assign evaluators to specific LLM qualities<br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Sampling bias due to evaluators not being representative of the intended setting<br>
-                                                    • Observation bias due to inadequate or inappropriate evaluator expertise for a specific LLM quality
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="2" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Blinding of Evaluators:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Describe all measures used, if any, to blind trial evaluators and researchers from knowledge of the answer source. Provide information relating to whether the intended blinding was effective.
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Detection bias due to knowledge of the answer source
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="2" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <!-- Outcomes -->
-                                            <tr class="bg-slate-200/50 font-bold">
-                                                <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Outcomes</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-4 text-xs leading-relaxed">
-                                                    <strong>Performance Metrics:</strong><br>
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Describe specific metrics used for each outcome quality 
-                                                    • Describes if desired outcomes were pre-specified prior to conducting the study.
-                                                </td>
-                                                <td class="p-4 text-xs text-slate-600 italic">
-                                                    • Measurement bias due to the LLM qualities or evaluation metrics not matching the research aim
-                                                </td>
-                                                <!-- <td class="p-3"><textarea class="w-full bg-white border border-slate-200 rounded p-2 text-xs focus:ring-1 focus:ring-blue-500 outline-none" rows="2" placeholder="Enter evidence..."></textarea></td> -->
-                                                <td class="p-3">
-                                                    <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
-                                                        <option value="">Select...</option>
-                                                        <option class="text-green-600">Low</option>
-                                                        <option class="text-red-600">High</option>
-                                                        <option class="text-yellow-600">Unclear</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="mt-6 flex justify-end">
-                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition" onclick="exportTableJudgement()">Export Judgement</button>
-                                </div>
+                        <div class="flex flex-col md:flex-row md:h-[420px]">
+                            <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
+                                <img src="assets/aqat.png" alt="AQAT Tool" class="tool-image w-full h-full object-cover transition-transform duration-500">
+                            </div>
+                            <div class="md:w-1/2 p-5 md:p-8 flex flex-col justify-center overflow-y-auto">
+                                <h3 class="text-lg font-bold mb-2 text-slate-800 italic">AQAT (Alberta Quality Assessment Tool: Risk of Bias)</h3>
+                                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Evaluation framework specifically designed for risk assessment in medical diagnostic AI systems, focusing on reliability and clinical safety standards.</p>
+                                <button onclick="showPage('aqat')" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
+                                    Open Tool <span class="ml-2">→</span>
+                                </button>
                             </div>
                         </div>
                     </article>
 
-                    
-
                     <!-- Project 2 -->
                     <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col md:flex-row">
+                        <div class="flex flex-col md:flex-row md:h-[420px]">
                             <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
                                 <img src="assets/LCIRE.png" alt="CIRE Tool" class="tool-image w-full h-full object-cover transition-transform duration-500">
                             </div>
-                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">CIRE (LLM-based Clinical Information Retention Evaluation)</h3>
-                                <p class="text-slate-600 mb-6 leading-relaxed">An LLM-based metric that measures whether clinically meaningful information has been changed, removed, or preserved in clinical texts.</p>
-                                <div class="mb-6">
+                            <div class="md:w-1/2 p-5 md:p-8 flex flex-col justify-center overflow-y-auto">
+                                <h3 class="text-lg font-bold mb-2 text-slate-800 italic">CIRE (LLM-based Clinical Information Retention Evaluation)</h3>
+                                <p class="text-sm text-slate-600 mb-3 leading-relaxed">An LLM-based metric that measures whether clinically meaningful information has been changed, removed, or preserved in clinical texts.</p>
+                                <div class="mb-3">
                                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
                                     <p class="text-xs text-slate-700 italic leading-relaxed">Kiana Aghakasiri, Noopur Zambare, JoAnn Thai, Carrie Ye, Mayur Mehta, J Ross Mitchell, Mohamed Abdalla</p>
                                 </div>
+                                <button onclick="openCiteModal('cire')" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-blue-600 border border-slate-200 hover:border-blue-300 rounded-lg px-3 py-1.5 transition mb-3 w-fit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    Cite
+                                </button>
                                 <a href="https://aclanthology.org/2025.emnlp-main.1637/" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
                                     Read Paper <span class="ml-2">→</span>
                                 </a>
@@ -350,19 +134,23 @@
 
                     <!-- Project 3 -->
                     <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col md:flex-row">
+                        <div class="flex flex-col md:flex-row md:h-[420px]">
                             <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
                                 <img src="assets/deid-culture.png" alt="Multicultural DeID" class="tool-image w-full h-full object-cover transition-transform duration-500">
                             </div>
-                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">BERT-MultiCulture-DEID</h3>
-                                <p class="text-slate-600 mb-6 leading-relaxed">A de-identification model based on BERT that is designed to improve equity across diverse linguistic and cultural identifiers in clinical text.</p>
-                                <div class="mb-6">
+                            <div class="md:w-1/2 p-5 md:p-8 flex flex-col justify-center overflow-y-auto">
+                                <h3 class="text-lg font-bold mb-2 text-slate-800 italic">BERT-MultiCulture-DEID</h3>
+                                <p class="text-sm text-slate-600 mb-3 leading-relaxed">A de-identification model based on BERT that is designed to improve equity across diverse linguistic and cultural identifiers in clinical text.</p>
+                                <div class="mb-3">
                                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
                                     <p class="text-xs text-slate-700 italic leading-relaxed">Noopur Zambare, Kiana Aghakasiri, Carissa Lin, Carrie Ye, J Ross Mitchell, Mohamed Abdalla</p>
                                 </div>
+                                <button onclick="openCiteModal('bert')" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-blue-600 border border-slate-200 hover:border-blue-300 rounded-lg px-3 py-1.5 transition mb-3 w-fit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    Cite
+                                </button>
                                 <a href="https://zenodo.org/records/18342292" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
-                                    Link to the Tool<span class="ml-2">→</span>
+                                    Link to the Tool <span class="ml-2">→</span>
                                 </a>
                                 <a href="https://arxiv.org/abs/2602.15869" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
                                     Read Paper <span class="ml-2">→</span>
@@ -373,19 +161,23 @@
 
                     <!-- Project 4 -->
                     <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col md:flex-row">
+                        <div class="flex flex-col md:flex-row md:h-[420px]">
                             <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
                                 <img src="assets/BEAM.png" alt="BEAM Research" class="tool-image w-full h-full object-cover transition-transform duration-500">
                             </div>
-                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">BEAM: Benchmarking Memory Capabilities of LLMs</h3>
-                                <p class="text-slate-600 mb-6 leading-relaxed">A large-scale benchmark of long, coherent multi-domain conversations (up to 10 million tokens) with probing questions designed to measure diverse long-term memory abilities in LLMs.</p>
-                                <div class="mb-6">
+                            <div class="md:w-1/2 p-5 md:p-8 flex flex-col justify-center overflow-y-auto">
+                                <h3 class="text-lg font-bold mb-2 text-slate-800 italic">BEAM: Benchmarking Memory Capabilities of LLMs</h3>
+                                <p class="text-sm text-slate-600 mb-3 leading-relaxed">A large-scale benchmark of long, coherent multi-domain conversations (up to 10 million tokens) with probing questions designed to measure diverse long-term memory abilities in LLMs.</p>
+                                <div class="mb-3">
                                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
                                     <p class="text-xs text-slate-700 italic leading-relaxed">Mohammad Tavakoli, Alireza Salemi, Carrie Ye, Mohamed Abdalla, Hamed Zamani, J Ross Mitchell</p>
                                 </div>
+                                <button onclick="openCiteModal('beam')" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-blue-600 border border-slate-200 hover:border-blue-300 rounded-lg px-3 py-1.5 transition mb-3 w-fit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    Cite
+                                </button>
                                 <a href="https://github.com/mohammadtavakoli78/BEAM" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
-                                    Link to the Tool<span class="ml-2">→</span>
+                                    Link to the Tool <span class="ml-2">→</span>
                                 </a>
                                 <a href="https://arxiv.org/abs/2510.27246" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
                                     Read Paper <span class="ml-2">→</span>
@@ -396,19 +188,23 @@
 
                     <!-- Project 5 -->
                     <article class="tool-card group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col md:flex-row">
+                        <div class="flex flex-col md:flex-row md:h-[420px]">
                             <div class="md:w-1/2 aspect-video md:aspect-auto bg-slate-200 relative overflow-hidden">
                                 <img src="assets/llm.png" alt="LIGHT Framework" class="tool-image w-full h-full object-cover transition-transform duration-500">
                             </div>
-                            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                                <h3 class="text-2xl font-bold mb-3 text-slate-800 italic">LIGHT: Improving Memory Capabilities of LLMs</h3>
-                                <p class="text-slate-600 mb-6 leading-relaxed">A cognitively inspired memory-augmentation framework that equips LLMs with episodic, working, and scratchpad memory systems to improve performance on long-context tasks evaluated by BEAM.</p>
-                                <div class="mb-6">
+                            <div class="md:w-1/2 p-5 md:p-8 flex flex-col justify-center overflow-y-auto">
+                                <h3 class="text-lg font-bold mb-2 text-slate-800 italic">LIGHT: Improving Memory Capabilities of LLMs</h3>
+                                <p class="text-sm text-slate-600 mb-3 leading-relaxed">A cognitively inspired memory-augmentation framework that equips LLMs with episodic, working, and scratchpad memory systems to improve performance on long-context tasks evaluated by BEAM.</p>
+                                <div class="mb-3">
                                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
                                     <p class="text-xs text-slate-700 italic leading-relaxed">Mohammad Tavakoli, Alireza Salemi, Carrie Ye, Mohamed Abdalla, Hamed Zamani, J Ross Mitchell</p>
                                 </div>
+                                <button onclick="openCiteModal('light')" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-blue-600 border border-slate-200 hover:border-blue-300 rounded-lg px-3 py-1.5 transition mb-3 w-fit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    Cite
+                                </button>
                                 <a href="https://github.com/mohammadtavakoli78/BEAM" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
-                                    Link to the Tool<span class="ml-2">→</span>
+                                    Link to the Tool <span class="ml-2">→</span>
                                 </a>
                                 <a href="https://arxiv.org/abs/2510.27246" target="_blank" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
                                     Read Paper <span class="ml-2">→</span>
@@ -422,7 +218,261 @@
         </section>
 
 
-        <!-- CONTACT PAGE (Back to focused design) -->
+        <!-- AQAT TOOL PAGE -->
+        <section id="page-aqat" class="hidden page-transition py-20">
+            <div class="max-w-[1200px] mx-auto px-6">
+
+                <!-- Back button -->
+                <button onclick="showPage('tools')" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-blue-600 transition mb-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Back to Tools
+                </button>
+
+                <header class="mb-10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Ongoing</span>
+                    </div>
+                    <h2 class="text-4xl font-bold mb-3 text-slate-900 italic">AQAT: Alberta Quality Assessment Tool</h2>
+                    <p class="text-slate-500 max-w-3xl">Evaluation framework specifically designed for risk assessment in medical diagnostic AI systems, focusing on reliability and clinical safety standards. Fill in the judgements below and export when complete.</p>
+                </header>
+
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="p-8 md:p-12">
+                        <div class="table-container overflow-x-auto border border-slate-200 rounded-xl bg-slate-50">
+                            <table id="judgementTable" class="w-full text-left text-sm border-collapse min-w-[1000px]">
+                                <thead>
+                                    <tr class="bg-slate-800 text-white">
+                                        <th class="p-4 border-r border-slate-700 w-1/4">Type of Bias</th>
+                                        <th class="p-4 border-r border-slate-700 w-1/4">Potential Source of Bias</th>
+                                        <th class="p-4 border-r border-slate-700 w-1/3">Support for Judgement</th>
+                                        <th class="p-4 w-40 text-center">Judgement (RoB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+
+                                    <!-- Questions Section -->
+                                    <tr class="bg-slate-200/50 font-bold">
+                                        <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Questions</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Question Source</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • If questions were created/generated specifically for the study, describe the method used to create the question dataset, including who created the questions and if the questions are reflective of the intended study objective<br>
+                                            • If questions were selected from an existing question source, adequately describe the source to allow an assessment of whether it addresses the intended research question
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Expectancy bias due to creation of questions reflective of researcher's expectations<br>
+                                            • Representation bias due to question source not being representative of the target population<br>
+                                            • Construct-validity bias due to questions not matching the research aim
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Question Selection</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • If questions were selected from an existing question source, describe the method used to select the questions from the original source (eg, random, consecutive, all, or by certain factors)
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Sampling bias due to question not being representative of the intended setting
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Question Manipulation</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • If any questions were manipulated from the original source, describe and justify the rationale for the manipulation.<br>
+                                            • Or if any prompting was provided in addition to the index question, report the exact wording of the prompt(s)
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Construct-validity bias due to questions not matching the research aim<br>
+                                            • Expectancy bias due to question manipulation that may reflect researcher's expectations
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Reference Answers Section -->
+                                    <tr class="bg-slate-200/50 font-bold">
+                                        <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Reference Answers</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Reference Answer Source</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • If reference answers were generated specifically for the study, describe the method used to create the reference answer dataset, including who created the reference answers and if the answers are reflective of a true reference standard<br>
+                                            • If reference answers were selected from an existing reference answer source, adequately describe the source to allow an assessment of whether it is reflective of a true reference standard
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Construct-validity bias due to answers not matching the true reference standard study was designed to evaluate<br>
+                                            • Representation bias due to question source not being representative of the target population
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Reference Answer Selection</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • If not all reference answers to a given question were used, describe the method by which reference answers were selected
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Sampling bias due to answers not being representative of the intended setting
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <!-- LLM Answers Section -->
+                                    <tr class="bg-slate-200/50 font-bold">
+                                        <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">LLM Answers</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>LLM Answer Selection</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Describe how many answers were generated for each question and if not all answers were assessed, describe how answers were selected for assessment
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Sampling bias due to answers not being representative of all LLM answers
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Evaluators Section -->
+                                    <tr class="bg-slate-200/50 font-bold">
+                                        <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Evaluators</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Evaluator Selection</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Describe the method used to select evaluators, and assign evaluators to specific LLM qualities
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Sampling bias due to evaluators not being representative of the intended setting<br>
+                                            • Observation bias due to inadequate or inappropriate evaluator expertise for a specific LLM quality
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Blinding of Evaluators</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Describe all measures used, if any, to blind trial evaluators and researchers from knowledge of the answer source. Provide information relating to whether the intended blinding was effective.
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Detection bias due to knowledge of the answer source
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Outcomes Section -->
+                                    <tr class="bg-slate-200/50 font-bold">
+                                        <td colspan="4" class="p-3 text-slate-700 uppercase tracking-wider text-[11px]">Outcomes</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-xs leading-relaxed">
+                                            <strong>Performance Metrics</strong>
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Describe specific metrics used for each outcome quality<br>
+                                            • Describes if desired outcomes were pre-specified prior to conducting the study.
+                                        </td>
+                                        <td class="p-4 text-xs text-slate-600 italic">
+                                            • Measurement bias due to the LLM qualities or evaluation metrics not matching the research aim
+                                        </td>
+                                        <td class="p-3">
+                                            <select class="w-full bg-white border border-slate-200 rounded p-1 text-xs outline-none">
+                                                <option value="">Select...</option>
+                                                <option value="Low">Low</option>
+                                                <option value="High">High</option>
+                                                <option value="Unclear">Unclear</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-8 flex justify-end">
+                            <button class="bg-blue-600 text-white px-8 py-3 rounded-xl text-sm font-bold shadow-md hover:bg-blue-700 transition" onclick="exportTableJudgement()">
+                                Export Judgement
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CONTACT PAGE -->
         <section id="page-contact" class="hidden page-transition py-20">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100 flex flex-col md:flex-row">
@@ -474,19 +524,9 @@
                 </div>
             </div>
         </section>
+
     </div>
 
-    <!-- Footer -->
-    <!-- <footer class="bg-slate-700 text-white py-12 border-t border-slate-800">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="text-center md:text-left">
-                    <p class="text-slate-200 text-xs">Alberta Quality Assessment Tools</p>
-                    <p class="mt-16 text-[10px] text-slate-300 uppercase tracking-widest">© 2026 Alberta Quality Assessment Tools (AQAT). All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer> -->
     <!-- Footer -->
     <footer class="bg-slate-700 text-white py-12 border-t border-slate-800">
         <div class="max-w-6xl mx-auto px-6">
@@ -501,50 +541,75 @@
             <div class="mt-10 pt-8 border-t border-slate-600">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] text-center mb-6">Supported by:</p>
                 <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16">
-
                     <a href="https://www.ualberta.ca" target="_blank" rel="noopener" class="flex items-center justify-center">
                         <img src="https://a-ca.storyblok.com/f/2000323/412x112/7158dfe828/logo-uofa.png" alt="University of Alberta" style="height:36px; width:auto; filter: brightness(2); opacity:0.7;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none" class="font-extrabold text-slate-400">UofA</span>
                     </a>
-
                     <a href="https://www.amii.ca" target="_blank" rel="noopener" class="flex items-center justify-center">
                         <img src="https://upload.wikimedia.org/wikipedia/en/0/06/Amii_Research_Institute_Logo.svg" alt="Amii" style="height:36px; width:auto; filter: brightness(2); opacity:0.7;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none" class="font-extrabold text-slate-400">Amii</span>
                     </a>
-
                     <a href="https://www.ualberta.ca/en/health-sciences/research/ai-and-health-hub.html" target="_blank" rel="noopener">
                         <span class="text-sm font-bold text-slate-400 tracking-tight">AI + Health Hub</span>
                     </a>
-
                     <a href="https://cihr-irsc.gc.ca" target="_blank" rel="noopener" class="flex items-center justify-center">
                         <img src="https://aim4communityhealth.ca/wp-content/uploads/2024/08/CIHR-Logo-transparent-edited.png" alt="CIHR" style="height:36px; width:auto; filter: brightness(2); opacity:0.9;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none" class="font-extrabold text-slate-400">CIHR</span>
                     </a>
-
                     <a href="https://arthritis.ca" target="_blank" rel="noopener" class="flex items-center justify-center">
                         <img src="https://arthritis.ca/wp-content/themes/arthritis-society-of-canada/theme-assets/en_light_logo.png" alt="Arthritis Society Canada" style="height:36px; width:auto; filter: brightness(2); opacity:0.7;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none" class="font-extrabold text-slate-400">Arthritis Society Canada</span>
                     </a>
-
                     <a href="https://cifar.ca" target="_blank" rel="noopener" class="flex items-center justify-center">
                         <img src="https://cifar.ca/wp-content/bb-icons/icon-brand/images/logo.svg" alt="CIFAR" style="height:36px; width:auto; filter:brightness(2); opacity:0.7;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none" class="font-extrabold text-slate-400">CIFAR</span>
                     </a>
-
                 </div>
             </div>
-
         </div>
     </footer>
 
+    <!-- Citation Modal -->
+    <div id="citeModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeCiteModal()"></div>
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-xl overflow-hidden">
+            <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100">
+                <h3 id="citeModalTitle" class="text-base font-bold text-slate-800"></h3>
+                <button onclick="closeCiteModal()" class="text-slate-400 hover:text-slate-600 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <!-- Format Tabs -->
+            <div class="flex gap-1 px-6 pt-4">
+                <button onclick="setCiteTab('apa')" id="tab-apa" class="cite-tab px-4 py-1.5 rounded-full text-xs font-bold transition">APA</button>
+                <button onclick="setCiteTab('vancouver')" id="tab-vancouver" class="cite-tab px-4 py-1.5 rounded-full text-xs font-bold transition">Vancouver</button>
+                <button onclick="setCiteTab('bibtex')" id="tab-bibtex" class="cite-tab px-4 py-1.5 rounded-full text-xs font-bold transition">BibTeX</button>
+            </div>
+            <!-- Citation Text -->
+            <div class="px-6 pt-4 pb-6">
+                <div class="relative bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <pre id="citeText" class="text-xs text-slate-700 whitespace-pre-wrap break-words font-mono leading-relaxed"></pre>
+                </div>
+                <div class="flex justify-end mt-4">
+                    <button onclick="copyCitation()" id="copyBtn" class="flex items-center gap-2 bg-blue-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        
+        const VALID_PAGES = ['home', 'tools', 'contact', 'aqat'];
+
         function showPage(pageId) {
             document.querySelectorAll('section').forEach(section => {
                 section.classList.add('hidden');
             });
             document.getElementById('page-' + pageId).classList.remove('hidden');
             window.scrollTo(0, 0);
+            // Highlight nav only for top-level pages
             document.querySelectorAll('.nav-link').forEach(link => {
                 if (link.dataset.page === pageId) {
                     link.classList.add('text-blue-400');
@@ -559,7 +624,7 @@
 
         window.addEventListener('load', () => {
             const hash = window.location.hash.replace('#', '');
-            if (['home', 'tools', 'contact'].includes(hash)) {
+            if (VALID_PAGES.includes(hash)) {
                 showPage(hash);
             } else {
                 showPage('home');
@@ -576,7 +641,7 @@
             const form = event.target;
             const btn = document.getElementById('submitBtn');
             const originalText = btn.innerHTML;
-            
+
             btn.disabled = true;
             btn.innerHTML = "Sending...";
 
@@ -608,28 +673,124 @@
             document.getElementById('formSuccess').classList.add('hidden');
         }
 
+        // ── Citation Modal ──────────────────────────────────────────────
+        const citations = {
+            cire: {
+                title: 'Cite CIRE',
+                apa: `Aghakasiri, K., Zambare, N., Thai, J., Ye, C., Mehta, M., Mitchell, J. R., & Abdalla, M. (2025). CIRE: LLM-based Clinical Information Retention Evaluation. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing. https://aclanthology.org/2025.emnlp-main.1637/`,
+                vancouver: `Aghakasiri K, Zambare N, Thai J, Ye C, Mehta M, Mitchell JR, Abdalla M. CIRE: LLM-based Clinical Information Retention Evaluation. In: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing; 2025. Available from: https://aclanthology.org/2025.emnlp-main.1637/`,
+                bibtex: `@inproceedings{aghakasiri2025cire,
+  title     = {CIRE: LLM-based Clinical Information Retention Evaluation},
+  author    = {Aghakasiri, Kiana and Zambare, Noopur and Thai, JoAnn and Ye, Carrie and Mehta, Mayur and Mitchell, J Ross and Abdalla, Mohamed},
+  booktitle = {Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  year      = {2025},
+  url       = {https://aclanthology.org/2025.emnlp-main.1637/}
+}`
+            },
+            bert: {
+                title: 'Cite BERT-MultiCulture-DEID',
+                apa: `Zambare, N., Aghakasiri, K., Lin, C., Ye, C., Mitchell, J. R., & Abdalla, M. (2026). BERT-MultiCulture-DEID. arXiv. https://arxiv.org/abs/2602.15869`,
+                vancouver: `Zambare N, Aghakasiri K, Lin C, Ye C, Mitchell JR, Abdalla M. BERT-MultiCulture-DEID. arXiv [Preprint]. 2026. Available from: https://arxiv.org/abs/2602.15869`,
+                bibtex: `@misc{zambare2026bert,
+  title         = {BERT-MultiCulture-DEID},
+  author        = {Zambare, Noopur and Aghakasiri, Kiana and Lin, Carissa and Ye, Carrie and Mitchell, J Ross and Abdalla, Mohamed},
+  year          = {2026},
+  eprint        = {2602.15869},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2602.15869}
+}`
+            },
+            beam: {
+                title: 'Cite BEAM',
+                apa: `Tavakoli, M., Salemi, A., Ye, C., Abdalla, M., Zamani, H., & Mitchell, J. R. (2025). BEAM: Benchmarking memory capabilities of LLMs. arXiv. https://arxiv.org/abs/2510.27246`,
+                vancouver: `Tavakoli M, Salemi A, Ye C, Abdalla M, Zamani H, Mitchell JR. BEAM: Benchmarking memory capabilities of LLMs. arXiv [Preprint]. 2025. Available from: https://arxiv.org/abs/2510.27246`,
+                bibtex: `@misc{tavakoli2025beam,
+  title         = {BEAM: Benchmarking Memory Capabilities of LLMs},
+  author        = {Tavakoli, Mohammad and Salemi, Alireza and Ye, Carrie and Abdalla, Mohamed and Zamani, Hamed and Mitchell, J Ross},
+  year          = {2025},
+  eprint        = {2510.27246},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2510.27246}
+}`
+            },
+            light: {
+                title: 'Cite LIGHT',
+                apa: `Tavakoli, M., Salemi, A., Ye, C., Abdalla, M., Zamani, H., & Mitchell, J. R. (2025). LIGHT: Improving memory capabilities of LLMs. arXiv. https://arxiv.org/abs/2510.27246`,
+                vancouver: `Tavakoli M, Salemi A, Ye C, Abdalla M, Zamani H, Mitchell JR. LIGHT: Improving memory capabilities of LLMs. arXiv [Preprint]. 2025. Available from: https://arxiv.org/abs/2510.27246`,
+                bibtex: `@misc{tavakoli2025light,
+  title         = {LIGHT: Improving Memory Capabilities of LLMs},
+  author        = {Tavakoli, Mohammad and Salemi, Alireza and Ye, Carrie and Abdalla, Mohamed and Zamani, Hamed and Mitchell, J Ross},
+  year          = {2025},
+  eprint        = {2510.27246},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2510.27246}
+}`
+            }
+        };
+
+        let currentCiteKey = null;
+        let currentTab = 'apa';
+
+        function openCiteModal(key) {
+            currentCiteKey = key;
+            currentTab = 'apa';
+            document.getElementById('citeModalTitle').textContent = citations[key].title;
+            document.getElementById('citeModal').classList.remove('hidden');
+            setCiteTab('apa');
+        }
+
+        function closeCiteModal() {
+            document.getElementById('citeModal').classList.add('hidden');
+            currentCiteKey = null;
+        }
+
+        function setCiteTab(tab) {
+            currentTab = tab;
+            ['apa', 'vancouver', 'bibtex'].forEach(t => {
+                document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+            });
+            document.getElementById('citeText').textContent = citations[currentCiteKey][tab];
+            // Reset copy button
+            const btn = document.getElementById('copyBtn');
+            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg> Copy`;
+            btn.classList.remove('bg-green-600');
+            btn.classList.add('bg-blue-600');
+        }
+
+        function copyCitation() {
+            const text = citations[currentCiteKey][currentTab];
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Copied!`;
+                btn.classList.remove('bg-blue-600');
+                btn.classList.add('bg-green-600');
+                setTimeout(() => setCiteTab(currentTab), 2000);
+            });
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeCiteModal();
+        });
+        // ── End Citation Modal ──────────────────────────────────────────
+
         function exportTableJudgement() {
             const table = document.getElementById('judgementTable');
             if (!table) return;
 
-            // Clone the table to avoid modifying the UI
             const tableClone = table.cloneNode(true);
 
-            // Handle dropdowns: cloning doesn't preserve selected values
-            // We find the original selects and update the clone with static text
             const originalSelects = table.querySelectorAll('select');
             const clonedSelects = tableClone.querySelectorAll('select');
 
             originalSelects.forEach((select, index) => {
                 const selectedText = select.options[select.selectedIndex].text;
                 const parent = clonedSelects[index].parentNode;
-                
-                // Create a styled span to replace the select in the print version
+
                 const span = document.createElement('span');
                 span.innerText = selectedText === 'Select...' ? 'Not Judged' : selectedText;
                 span.style.fontWeight = 'bold';
-                
-                // Color coding based on value
+
                 if (select.value === 'Low') span.style.color = '#16a34a';
                 if (select.value === 'High') span.style.color = '#dc2626';
                 if (select.value === 'Unclear') span.style.color = '#ca8a04';
@@ -637,33 +798,28 @@
                 parent.replaceChild(span, clonedSelects[index]);
             });
 
-            // Create a temporary hidden iframe for printing
             const printWindow = window.open('', '_blank', 'height=600,width=900');
-            
+
             printWindow.document.write('<html><head><title>AQAT Export</title>');
-            // Add basic styles to the print window
             printWindow.document.write('<style>');
             printWindow.document.write('body { font-family: sans-serif; padding: 40px; color: #1e293b; }');
             printWindow.document.write('h1 { font-size: 24px; margin-bottom: 20px; text-align: center; }');
             printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 12px; }');
             printWindow.document.write('th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; vertical-align: top; }');
             printWindow.document.write('th { background-color: #1e293b; color: white; }');
-            printWindow.document.write('.bg-slate-200-50 { background-color: #f1f5f9; font-weight: bold; }');
             printWindow.document.write('</style></head><body>');
             printWindow.document.write('<h1>AQAT: Risk of Bias Assessment Results</h1>');
             printWindow.document.write(tableClone.outerHTML);
             printWindow.document.write('</body></html>');
-            
+
             printWindow.document.close();
-            
-            // Wait for content to render before printing
-            printWindow.onload = function() {
+
+            printWindow.onload = function () {
                 printWindow.focus();
                 printWindow.print();
                 printWindow.close();
             };
-            
-            // Fallback for browsers where onload might not trigger correctly on an empty-started window
+
             setTimeout(() => {
                 if (!printWindow.closed) {
                     printWindow.print();
