@@ -101,8 +101,16 @@
                             <div class="md:w-1/2 p-5 md:p-8 flex flex-col justify-center overflow-y-auto">
                                 <h3 class="text-lg font-bold mb-2 text-slate-800 italic">AQAT (Alberta Quality Assessment Tool: Risk of Bias)</h3>
                                 <p class="text-sm text-slate-600 mb-3 leading-relaxed">Evaluation framework specifically designed for risk assessment in medical diagnostic AI systems, focusing on reliability and clinical safety standards.</p>
+                                <div class="mb-3">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Authors</p>
+                                    <p class="text-xs text-slate-700 italic leading-relaxed">Carrie Ye, J Ross Mitchell, Daniel C Baumgart, Zechen Ma, Angela Lim Fung, Daniela Garcia Orellana, Juel Chowdhury, Abass Abdullah, Steven Katz, Jacob L Jaremko, Pierre Boulanger, Claire E H Barber, Gillian Lemermeyer, Hosna Jabbari, Lili Mou, Maryam Mirzaei, Mary Waithera Beckett Githumbi, Puneeta Tandon, Randy Goebel, Rhys Clark, Whitney Hung, Marjan Abbasi, Farhad Maleki, Scott Klarenbach, Mohamed Abdalla</p>
+                                </div>
+                                <button onclick="openCiteModal('aqat')" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-blue-600 border border-slate-200 hover:border-blue-300 rounded-lg px-3 py-1.5 transition mb-3 w-fit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    Cite
+                                </button>
                                 <button onclick="showPage('aqat')" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 transition">
-                                    Open Tool <span class="ml-2">→</span>
+                                    Link to the Tool <span class="ml-2">→</span>
                                 </button>
                             </div>
                         </div>
@@ -675,54 +683,77 @@
 
         // ── Citation Modal ──────────────────────────────────────────────
         const citations = {
+            aqat: {
+                title: 'Cite AQAT:RoB',
+                apa: `Ye, C., Mitchell, J. R., Baumgart, D. C., Ma, Z., Fung, A. L., Orellana, D. G., Chowdhury, J., Abdullah, A., Katz, S., Jaremko, J. L., Boulanger, P., Barber, C. E. H., Lemermeyer, G., Jabbari, H., Mou, L., Mirzaei, M., Githumbi, M. W. B., Tandon, P., Goebel, R., Clark, R., Hung, W., Abbasi, M., Maleki, F., Klarenbach, S., & Abdalla, M. (2026). The Alberta Risk of Bias Assessment Tool (AQAT:RoB) for the evaluation of medical large language model question-answer studies: Development and pilot validation. Journal of Medical Internet Research. https://doi.org/10.2196/87057`,
+                vancouver: `Ye C, Mitchell JR, Baumgart DC, Ma Z, Fung AL, Orellana DG, Chowdhury J, Abdullah A, Katz S, Jaremko JL, Boulanger P, Barber CEH, Lemermeyer G, Jabbari H, Mou L, Mirzaei M, Githumbi MWB, Tandon P, Goebel R, Clark R, Hung W, Abbasi M, Maleki F, Klarenbach S, Abdalla M. The Alberta Risk of Bias Assessment Tool (AQAT:RoB) for the evaluation of medical large language model question-answer studies: Development and pilot validation. J Med Internet Res. 2026 Feb 24. doi:10.2196/87057. PMID: 41741419.`,
+                bibtex: `@article{ye2026aqatrob,
+  title     = {The Alberta Risk of Bias Assessment Tool ({AQAT:RoB}) for the Evaluation of Medical Large Language Model Question-Answer Studies: Development and Pilot Validation},
+  author    = {Ye, Carrie and Mitchell, Joseph Ross and Baumgart, Daniel C and Ma, Zechen and Fung, Angela Lim and Orellana, Daniela Garcia and Chowdhury, Juel and Abdullah, Abass and Katz, Steven and Jaremko, Jacob L and Boulanger, Pierre and Barber, Claire E H and Lemermeyer, Gillian and Jabbari, Hosna and Mou, Lili and Mirzaei, Maryam and Githumbi, Mary Waithera Beckett and Tandon, Puneeta and Goebel, Randy and Clark, Rhys and Hung, Whitney and Abbasi, Marjan and Maleki, Farhad and Klarenbach, Scott and Abdalla, Mohamed},
+  journal   = {Journal of Medical Internet Research},
+  year      = {2026},
+  month     = feb,
+  doi       = {10.2196/87057},
+  pmid      = {41741419},
+  url       = {https://doi.org/10.2196/87057}
+}`
+            },
             cire: {
                 title: 'Cite CIRE',
-                apa: `Aghakasiri, K., Zambare, N., Thai, J., Ye, C., Mehta, M., Mitchell, J. R., & Abdalla, M. (2025). CIRE: LLM-based Clinical Information Retention Evaluation. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing. https://aclanthology.org/2025.emnlp-main.1637/`,
-                vancouver: `Aghakasiri K, Zambare N, Thai J, Ye C, Mehta M, Mitchell JR, Abdalla M. CIRE: LLM-based Clinical Information Retention Evaluation. In: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing; 2025. Available from: https://aclanthology.org/2025.emnlp-main.1637/`,
-                bibtex: `@inproceedings{aghakasiri2025cire,
-  title     = {CIRE: LLM-based Clinical Information Retention Evaluation},
+                apa: `Aghakasiri, K., Zambare, N., Thai, J., Ye, C., Mehta, M., Mitchell, J. R., & Abdalla, M. (2025). Not what the doctor ordered: Surveying LLM-based de-identification and quantifying clinical information loss. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (pp. 32187–32203). Association for Computational Linguistics. https://doi.org/10.18653/v1/2025.emnlp-main.1637`,
+                vancouver: `Aghakasiri K, Zambare N, Thai J, Ye C, Mehta M, Mitchell JR, Abdalla M. Not what the doctor ordered: Surveying LLM-based de-identification and quantifying clinical information loss. In: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing; 2025 Nov; Suzhou, China. Association for Computational Linguistics; 2025. p. 32187–32203. Available from: https://aclanthology.org/2025.emnlp-main.1637/`,
+                bibtex: `@inproceedings{aghakasiri-etal-2025-doctor,
+  title     = {Not What the Doctor Ordered: Surveying {LLM}-based De-identification and Quantifying Clinical Information Loss},
   author    = {Aghakasiri, Kiana and Zambare, Noopur and Thai, JoAnn and Ye, Carrie and Mehta, Mayur and Mitchell, J Ross and Abdalla, Mohamed},
   booktitle = {Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  month     = nov,
   year      = {2025},
+  address   = {Suzhou, China},
+  publisher = {Association for Computational Linguistics},
+  pages     = {32187--32203},
+  doi       = {10.18653/v1/2025.emnlp-main.1637},
   url       = {https://aclanthology.org/2025.emnlp-main.1637/}
 }`
             },
             bert: {
                 title: 'Cite BERT-MultiCulture-DEID',
-                apa: `Zambare, N., Aghakasiri, K., Lin, C., Ye, C., Mitchell, J. R., & Abdalla, M. (2026). BERT-MultiCulture-DEID. arXiv. https://arxiv.org/abs/2602.15869`,
-                vancouver: `Zambare N, Aghakasiri K, Lin C, Ye C, Mitchell JR, Abdalla M. BERT-MultiCulture-DEID. arXiv [Preprint]. 2026. Available from: https://arxiv.org/abs/2602.15869`,
-                bibtex: `@misc{zambare2026bert,
-  title         = {BERT-MultiCulture-DEID},
+                apa: `Zambare, N., Aghakasiri, K., Lin, C., Ye, C., Mitchell, J. R., & Abdalla, M. (2026). Towards fair and efficient de-identification: Quantifying the efficiency and generalizability of de-identification approaches. arXiv. https://arxiv.org/abs/2602.15869`,
+                vancouver: `Zambare N, Aghakasiri K, Lin C, Ye C, Mitchell JR, Abdalla M. Towards fair and efficient de-identification: Quantifying the efficiency and generalizability of de-identification approaches. arXiv [Preprint]. 2026. Available from: https://arxiv.org/abs/2602.15869`,
+                bibtex: `@misc{zambare2026deid,
+  title         = {Towards Fair and Efficient De-identification: Quantifying the Efficiency and Generalizability of De-identification Approaches},
   author        = {Zambare, Noopur and Aghakasiri, Kiana and Lin, Carissa and Ye, Carrie and Mitchell, J Ross and Abdalla, Mohamed},
   year          = {2026},
   eprint        = {2602.15869},
   archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
   url           = {https://arxiv.org/abs/2602.15869}
 }`
             },
             beam: {
                 title: 'Cite BEAM',
-                apa: `Tavakoli, M., Salemi, A., Ye, C., Abdalla, M., Zamani, H., & Mitchell, J. R. (2025). BEAM: Benchmarking memory capabilities of LLMs. arXiv. https://arxiv.org/abs/2510.27246`,
-                vancouver: `Tavakoli M, Salemi A, Ye C, Abdalla M, Zamani H, Mitchell JR. BEAM: Benchmarking memory capabilities of LLMs. arXiv [Preprint]. 2025. Available from: https://arxiv.org/abs/2510.27246`,
-                bibtex: `@misc{tavakoli2025beam,
-  title         = {BEAM: Benchmarking Memory Capabilities of LLMs},
+                apa: `Tavakoli, M., Salemi, A., Ye, C., Abdalla, M., Zamani, H., & Mitchell, J. R. (2025). Beyond a million tokens: Benchmarking and enhancing long-term memory in LLMs. arXiv. https://arxiv.org/abs/2510.27246`,
+                vancouver: `Tavakoli M, Salemi A, Ye C, Abdalla M, Zamani H, Mitchell JR. Beyond a million tokens: Benchmarking and enhancing long-term memory in LLMs. arXiv [Preprint]. 2025. Available from: https://arxiv.org/abs/2510.27246`,
+                bibtex: `@misc{tavakoli2025milliontokensbenchmarkingenhancing,
+  title         = {Beyond a Million Tokens: Benchmarking and Enhancing Long-Term Memory in {LLMs}},
   author        = {Tavakoli, Mohammad and Salemi, Alireza and Ye, Carrie and Abdalla, Mohamed and Zamani, Hamed and Mitchell, J Ross},
   year          = {2025},
   eprint        = {2510.27246},
   archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
   url           = {https://arxiv.org/abs/2510.27246}
 }`
             },
             light: {
                 title: 'Cite LIGHT',
-                apa: `Tavakoli, M., Salemi, A., Ye, C., Abdalla, M., Zamani, H., & Mitchell, J. R. (2025). LIGHT: Improving memory capabilities of LLMs. arXiv. https://arxiv.org/abs/2510.27246`,
-                vancouver: `Tavakoli M, Salemi A, Ye C, Abdalla M, Zamani H, Mitchell JR. LIGHT: Improving memory capabilities of LLMs. arXiv [Preprint]. 2025. Available from: https://arxiv.org/abs/2510.27246`,
-                bibtex: `@misc{tavakoli2025light,
-  title         = {LIGHT: Improving Memory Capabilities of LLMs},
+                apa: `Tavakoli, M., Salemi, A., Ye, C., Abdalla, M., Zamani, H., & Mitchell, J. R. (2025). Beyond a million tokens: Benchmarking and enhancing long-term memory in LLMs. arXiv. https://arxiv.org/abs/2510.27246`,
+                vancouver: `Tavakoli M, Salemi A, Ye C, Abdalla M, Zamani H, Mitchell JR. Beyond a million tokens: Benchmarking and enhancing long-term memory in LLMs. arXiv [Preprint]. 2025. Available from: https://arxiv.org/abs/2510.27246`,
+                bibtex: `@misc{tavakoli2025milliontokensbenchmarkingenhancing,
+  title         = {Beyond a Million Tokens: Benchmarking and Enhancing Long-Term Memory in {LLMs}},
   author        = {Tavakoli, Mohammad and Salemi, Alireza and Ye, Carrie and Abdalla, Mohamed and Zamani, Hamed and Mitchell, J Ross},
   year          = {2025},
   eprint        = {2510.27246},
   archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
   url           = {https://arxiv.org/abs/2510.27246}
 }`
             }
